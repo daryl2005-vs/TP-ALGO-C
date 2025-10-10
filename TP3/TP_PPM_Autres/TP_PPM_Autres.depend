@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1760126045 source:/opt/lampp/htdocs/PROJETS ,DEV & PROFESSIONNLISME/GITHUB/TP-ALGO-C/TP3/TP_PPM_Autres/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
