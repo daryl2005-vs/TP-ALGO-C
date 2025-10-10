@@ -94,4 +94,4 @@ La structure `Image` stocke la largeur, la hauteur, la valeur maximale et les do
 
 ## Contribution
 
-Ce projet a été développé dans le cadre du TP n°1 d'INF231.
+Ce projet a été développé dans le cadre du TP n°3 d'INF231.
