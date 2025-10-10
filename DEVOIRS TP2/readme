@@ -1,0 +1,148 @@
+## Description
+📖 Description du projet
+
+Ce projet a pour objectif de manipuler différentes variantes de listes chaînées en langage C.
+Les opérations implémentées couvrent plusieurs structures :
+
+Liste simplement chaînée
+
+Suppression de toutes les occurrences d’un élément donné.
+
+Insertion d’un élément dans une liste triée.
+
+Liste doublement chaînée
+
+Insertion d’un élément dans une liste double triée.
+
+Liste simplement chaînée circulaire
+
+Insertion en tête.
+
+Insertion en queue.
+
+Liste doublement chaînée circulaire
+
+Insertion en tête.
+
+Insertion en queue.
+
+Toutes ces opérations sont accessibles via un menu interactif dans le fichier main.c.
+
+🧱 Structures de données utilisées
+🔹 Liste simplement chaînée
+
+Chaque nœud contient :
+
+typedef struct Node {
+    int data;
+    struct Node* next;
+} Node;
+
+
+data → valeur stockée.
+
+next → pointeur vers le nœud suivant.
+
+🔹 Liste doublement chaînée
+
+Chaque nœud contient :
+
+typedef struct DNode {
+    int data;
+    struct DNode* prev;
+    struct DNode* next;
+} DNode;
+
+
+data → valeur stockée.
+
+prev → pointeur vers le nœud précédent.
+
+next → pointeur vers le nœud suivant.
+
+🔹 Liste simplement chaînée circulaire
+typedef struct CNode {
+    int data;
+    struct CNode* next;
+} CNode;
+
+
+Le dernier nœud pointe vers le premier (cercle).
+
+🔹 Liste doublement chaînée circulaire
+typedef struct DCNode {
+    int data;
+    struct DCNode* prev;
+    struct DCNode* next;
+} DCNode;
+
+
+Le dernier nœud pointe vers le premier et inversement, formant un cercle double.
+
+⚙️ Fonctionnalités principales
+1️⃣ Suppression d’un élément dans une liste simple
+
+L’utilisateur saisit une valeur.
+
+Toutes les occurrences sont supprimées.
+
+2️⃣ Insertion triée (liste simple et double)
+
+La valeur est placée automatiquement au bon endroit selon l’ordre croissant.
+
+3️⃣ Insertion en tête et en queue (listes circulaires)
+
+Ajout rapide d’un élément au début ou à la fin de la liste.
+
+🛠️ Compilation
+Compilation directe avec GCC :
+
+Si tout est dans un seul fichier main.c :
+
+gcc main.c -o programme
+
+
+Si le projet est séparé en plusieurs fichiers :
+
+gcc main.c liste.c liste_double.c liste_circ.c liste_double_circ.c -o programme
+
+▶️ Exécution
+./programme
+
+
+Exemple de menu affiché :
+
+===== MENU =====
+1. Supprimer occurrences dans une liste simple
+2. Insertion dans une liste simple triée
+3. Insertion dans une liste double triée
+4. Insertion en tete/queue (liste circulaire simple)
+5. Insertion en tete/queue (liste circulaire double)
+0. Quitter
+Votre choix :
+
+🧪 Exemple d’utilisation
+
+Choisir l’option 2 (insertion dans liste simple triée).
+
+Entrer la valeur 15.
+
+Entrer la valeur 5.
+
+Entrer la valeur 20.
+
+Résultat affiché :
+
+5 -> 15 -> 20 -> NULL
+
+🚀 Améliorations possibles
+
+Ajouter la suppression d’éléments dans les listes circulaires.
+
+Ajouter la recherche d’un élément.
+
+Libérer correctement la mémoire avec free() avant de quitter.
+
+Implémenter une interface graphique simple (GTK ou ncurses).
+
+Générer des tests automatiques pour valider le projet.
