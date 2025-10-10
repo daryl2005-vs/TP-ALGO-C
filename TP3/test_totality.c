@@ -1,4 +1,3 @@
-```c
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -57,12 +56,12 @@ ImagePPM* charger_image(const char *nom_fichier) {
     if (!next_token(f, token, sizeof(token))) { fclose(f); return NULL; }
     maxval = atoi(token);
 
-    ImagePPM *image = malloc(sizeof(ImagePPM));
+    ImagePPM *image = (ImagePPM *)malloc(sizeof(ImagePPM));
     if (!image) { fclose(f); return NULL; }
     image->largeur = width;
     image->hauteur = height;
     image->max_val = maxval;
-    image->pixels = malloc(3 * width * height * sizeof(unsigned char));
+    image->pixels = (unsigned char *)malloc(3 * width * height * sizeof(unsigned char));
     if (!image->pixels) { free(image); fclose(f); return NULL; }
 
     int r, g, b, i = 0;
@@ -156,29 +155,29 @@ ImagePPM* decouper_image(ImagePPM *image, int l1, int l2, int c1, int c2) {
     }
     int new_h = l2 - l1 + 1;
     int new_w = c2 - c1 + 1;
-    ImagePPM *new_img = malloc(sizeof(ImagePPM));
-    new_img->largeur = new_w;
-    new_img->hauteur = new_h;
-    new_img->max_val = image->max_val;
-    new_img->pixels = malloc(3 * new_w * new_h * sizeof(unsigned char));
+    ImagePPM *decoupe = (ImagePPM *)malloc(sizeof(ImagePPM));
+    decoupe->largeur = new_w;
+    decoupe->hauteur = new_h;
+    decoupe->max_val = image->max_val;
+    decoupe->pixels = (unsigned char *)malloc(3 * new_w * new_h * sizeof(unsigned char));
     for (int yy = 0; yy < new_h; yy++) {
         for (int xx = 0; xx < new_w; xx++) {
             int old_y = l1 - 1 + yy;
             int old_x = c1 - 1 + xx;
             int old_idx = (old_y * image->largeur + old_x) * 3;
             int new_idx = (yy * new_w + xx) * 3;
-            new_img->pixels[new_idx] = image->pixels[old_idx];
-            new_img->pixels[new_idx + 1] = image->pixels[old_idx + 1];
-            new_img->pixels[new_idx + 2] = image->pixels[old_idx + 2];
+            decoupe->pixels[new_idx] = image->pixels[old_idx];
+            decoupe->pixels[new_idx + 1] = image->pixels[old_idx + 1];
+            decoupe->pixels[new_idx + 2] = image->pixels[old_idx + 2];
         }
     }
-    return new_img;
+    return decoupe;
 }
 
 void appliquer_filtre_median(ImagePPM *image) {
     int w = image->largeur;
     int h = image->hauteur;
-    unsigned char *temp = malloc(3 * w * h * sizeof(unsigned char));
+    unsigned char *temp = (unsigned char *)malloc(3 * w * h * sizeof(unsigned char));
     for (int i = 0; i < w * h; i++) {
         unsigned char voisins[9][3];
         int compteur = 0;
@@ -198,7 +197,7 @@ void appliquer_filtre_median(ImagePPM *image) {
             }
         }
         for (int c = 0; c < 3; c++) {
-            // Bubble sort
+            // Tri à bulles
             for (int a = 0; a < compteur - 1; a++) {
                 for (int b = a + 1; b < compteur; b++) {
                     if (voisins[a][c] > voisins[b][c]) {
@@ -332,4 +331,3 @@ int main() {
     }
     return 0;
 }
-```
